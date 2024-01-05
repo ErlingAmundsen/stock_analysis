@@ -32,6 +32,10 @@ def format_yahoo(ticker,period = None ,start = None, end = None , drop_cols = No
 
     ## If start is before stock
     start_test = data.index[0]
+
+    if not start:
+        start = data.index[0]
+
     if start_test.to_pydatetime().year > start.year:
         print('WARNING: THE STOCK MIGHT NOT HAVE BEEN OUT AT THE START DATE')
 
@@ -49,4 +53,4 @@ if __name__ == '__main__':
     period = '2y'
 
     data, _ = format_yahoo(ticker = ticker,start=start)
-    print(data.head())
+    print(data)
