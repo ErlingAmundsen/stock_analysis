@@ -1,10 +1,7 @@
-import sys
 import plotly.graph_objects as ply
 import datetime
 
-sys.path.append('./')
-
-from main_functions import format_yahoo as fy
+import format_yahoo as fy
 
 def candle_plot(data, meta = None,title = None, xtitle = None, ytitle = None):
     
@@ -16,7 +13,8 @@ def candle_plot(data, meta = None,title = None, xtitle = None, ytitle = None):
         open= data['Open'],
         high= data['High'],
         low= data['Low'],
-        close= data['Close']
+        close= data['Close'],
+        name = f'{meta['Ticker']} Stock Data'
     )]
 
     fig = ply.Figure(data = plotly_data)
@@ -31,17 +29,29 @@ def candle_plot(data, meta = None,title = None, xtitle = None, ytitle = None):
 
     layout_dict = {'paper_bgcolor': bg,
                    'plot_bgcolor': bg,
+                   
                    'title': {'font': {'color' : text}},
                    'xaxis_title':{'font': {'color' : text}},
                    'yaxis_title':{'font': {'color' : text}},
 
                    # green grids is mega cool
-                   'xaxis' : {'gridcolor': grid,
-                              'tickfont': {'color':grid}},
+                   'xaxis' : {
+                                'gridcolor': grid,
+                                'tickfont': {'color': grid}
+                                },
 
-                   'yaxis' : {'gridcolor': grid,
-                              'tickfont': {'color':grid}}
-                
+                   'yaxis' : {
+                                'gridcolor': grid,
+                                'tickfont': {'color': grid}
+                                },
+
+                    # only shows if more than one type of data (more than candlestick)
+                    'legend': {
+                                'bordercolor': 'green',
+                                'borderwidth': 1,
+                                'font': {'color': text}
+                                }
+
                    }
     
     if title:
@@ -66,9 +76,7 @@ def candle_plot(data, meta = None,title = None, xtitle = None, ytitle = None):
 
 
 if __name__ == '__main__':
-    data, meta = fy.format_yahoo('BTC-USD', period= '1y')
+    data, meta = fy.format_yahoo('AAPL', period= '1y')
     fig = candle_plot(data, meta)
-    title = 'Title test'
-
     fig.show()
     
