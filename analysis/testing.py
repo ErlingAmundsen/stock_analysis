@@ -39,3 +39,4 @@ if __name__ == "__main__":
     cls.name_t = "not_hello"
     print(cls.name_t)
     cls.name_t = "Nnonon"
+    ""
