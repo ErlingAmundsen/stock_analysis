@@ -1,5 +1,6 @@
 import yfinance as yf
 import datetime
+import pandas as pd
 
 
 def format_yahoo(

@@ -1,11 +1,22 @@
 import plotly.graph_objects as ply
 import datetime
+import os
 
-import format_yahoo as fy
+os.sys.path.append('./')
+import main_functions.format_yahoo as fy
 
-def candle_plot(data, meta = None,title = None, xtitle = None, ytitle = None):
-    """
-    Candle plot with a set style so that you have stylish plots
+def candle_plot(data, meta = None,title = None, xtitle = None, ytitle = None, colors = None):
+    """Plotting candle plot
+
+    Args:
+        data (_type_): full_data from format_yahoo
+        meta (_type_, optional): meta_data from format_yahoo, contains ticker name and stuff. Defaults to None.
+        title (_type_, optional):  will be title name if passed, else will be ticker name and dates. Defaults to None.
+        xtitle (_type_, optional): will be xtitle name if passed, else will be 'Date'. Defaults to None.
+        ytitle (_type_, optional): will be ytitle name if passed, else will be 'Price'. Defaults to None.
+
+    Returns:
+        fig: plotly figure
     """
 
     # Chose ply because of integrated interactability (slide window and cool colors)
@@ -24,10 +35,14 @@ def candle_plot(data, meta = None,title = None, xtitle = None, ytitle = None):
 
     # making my plot look cool because cant fool around
     # with stock data with ugly looking plots, that makes it so much worse
-    bg = 'black'
-    text = 'green'
-    grid = 'green'
-  
+    if not colors:
+        bg = 'black'
+        text = 'green'
+        grid = 'green'
+    else:
+        bg = colors['bg']
+        text = colors['text']
+        grid = colors['grid']
 
     layout_dict = {'paper_bgcolor': bg,
                    'plot_bgcolor': bg,
