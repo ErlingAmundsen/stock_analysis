@@ -11,4 +11,4 @@ def testing(data, list_time_indexes, axis="Close", days_lookback=None):
 
 
 if __name__ == "__main__":
-    data, meta = fy("BTC-USD", period="1y")
+    data, meta = fy.format_yahoo("BTC-USD", period="1y")
