@@ -4,7 +4,9 @@ import datetime
 import format_yahoo as fy
 
 def candle_plot(data, meta = None,title = None, xtitle = None, ytitle = None):
-    
+    """
+    Candle plot with a set style so that you have stylish plots
+    """
 
     # Chose ply because of integrated interactability (slide window and cool colors)
 

@@ -1,42 +1,14 @@
-import sys
-from dataclasses import dataclass
+import os
 
-sys.path.append("./")
-from main_functions import format_yahoo as fy
-
-
-def testing(vals):
-    list_test = vals.copy()
-
-    for i in range(len(list_test)):
-        list_test[i] = min(0, list_test[i])
-    return list_test
+os.sys.path.append("./")
+import main_functions.format_yahoo as fy
+import main_functions.plotting_standard as ps
 
 
-@dataclass
-class test_class:
-    _name: str
-
-    def __post_init__(self):
-        self._name = self._name.upper()
-
-    @property
-    def name_t(self):
-        return self._name
-
-    @name_t.setter
-    def name_t(self, val):
-        self._name = val.upper()
+def testing(data, list_time_indexes, axis="Close", days_lookback=None):
+    for date in list_time_indexes:
+        data_points = data[axis][data.index <= date]
 
 
 if __name__ == "__main__":
-    data, meta = fy.format_yahoo("BTC-USD", period="1y")
-
-    vals = "hello"
-    cls = test_class(vals)
-    print(cls._name)
-    print(cls.name_t)
-    cls.name_t = "not_hello"
-    print(cls.name_t)
-    cls.name_t = "Nnonon"
-    ""
+    data, meta = fy("BTC-USD", period="1y")
